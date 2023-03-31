@@ -1,9 +1,9 @@
 import "react-native-gesture-handler";
 import React from "react";
-import { MainStackRootProps } from "./types/MainStack";
+import { MainStackParamList } from "./types/MainStack";
 import { createStackNavigator } from "@react-navigation/stack";
 
-const Stack = createStackNavigator<MainStackRootProps>();
+const Stack = createStackNavigator<MainStackParamList>();
 
 export default function MainStackRoutes() {
   return (
