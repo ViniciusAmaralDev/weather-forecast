@@ -1,4 +1,5 @@
 import React from "react";
+import Providers from "./providers";
 import { colors, fonts } from "./theme";
 import { useColorScheme } from "react-native";
 import { ThemeProvider } from "styled-components";
@@ -9,7 +10,9 @@ export default function Main() {
 
   return (
     <ThemeProvider theme={{ colors: theme, fonts }}>
-      <></>
+      <Providers>
+        <></>
+      </Providers>
     </ThemeProvider>
   );
 }
