@@ -1,30 +1,30 @@
 import { ObjectSchema } from "realm";
 
 export const weatherEmbedded: ObjectSchema = {
-  name: "WeatherEmbedded",
   embedded: true,
+  name: "WeatherEmbedded",
   properties: {
     id: "int",
     main: "string",
-    description: "string",
     icon: "string",
+    description: "string",
   },
 };
 
 export const feelsLikeEmbedded: ObjectSchema = {
-  name: "FeelsLikeEmbedded",
   embedded: true,
+  name: "FeelsLikeEmbedded",
   properties: {
     day: "int",
-    night: "int",
     eve: "int",
     morn: "int",
+    night: "int",
   },
 };
 
 export const tempEmbedded: ObjectSchema = {
-  name: "TempEmbedded",
   embedded: true,
+  name: "TempEmbedded",
   properties: {
     day: "int",
     min: "int",
@@ -57,7 +57,7 @@ export const dailyEmbedded: ObjectSchema = {
     wind_speed: "int",
     temp: "TempEmbedded",
     feels_like: "FeelsLikeEmbedded",
-    weather: { type: "WeatherEmbedded", objectType: "list", default: [] },
+    weather: { objectType: "WeatherEmbedded", type: "list", default: [] },
   },
 };
 
@@ -70,13 +70,13 @@ export const alertsEmbedded: ObjectSchema = {
     event: "string",
     sender_name: "string",
     description: "string",
-    tags: { type: "string", objectType: "list", default: [] },
+    tags: { objectType: "string", type: "list", default: [] },
   },
 };
 
 export const hourlyEmbedded: ObjectSchema = {
-  name: "HourlyEmbedded",
   embedded: true,
+  name: "HourlyEmbedded",
   properties: {
     dt: "int",
     uvi: "int",
@@ -91,14 +91,14 @@ export const hourlyEmbedded: ObjectSchema = {
     feels_like: "int",
     visibility: "int",
     wind_speed: "int",
-    rain: "dictionary",
-    weather: { type: "WeatherEmbedded", objectType: "list", default: [] },
+    rain: { type: "dictionary", objectType: "int" },
+    weather: { objectType: "WeatherEmbedded", type: "list", default: [] },
   },
 };
 
 export const currentEmbedded: ObjectSchema = {
-  name: "CurrentEmbedded",
   embedded: true,
+  name: "CurrentEmbedded",
   properties: {
     dt: "int",
     uvi: "int",
@@ -113,13 +113,13 @@ export const currentEmbedded: ObjectSchema = {
     feels_like: "int",
     visibility: "int",
     wind_speed: "int",
-    weather: { type: "WeatherEmbedded", objectType: "list", default: [] },
+    weather: { objectType: "WeatherEmbedded", type: "list", default: [] },
   },
 };
 
 export const minutelyEmbedded: ObjectSchema = {
-  name: "MinutelyEmbedded",
   embedded: true,
+  name: "MinutelyEmbedded",
   properties: {
     dt: "int",
     precipitation: "int",
@@ -133,10 +133,10 @@ export const forecastSchema: ObjectSchema = {
     lon: "int",
     timezone: "string",
     timezone_offset: "int",
-    daily: { type: "DailyEmbedded", objectType: "list", default: [] },
-    alerts: { type: "AlertsEmbedded", objectType: "list", default: [] },
-    hourly: { type: "HourlyEmbedded", objectType: "list", default: [] },
-    current: { type: "CurrentEmbedded", objectType: "list", default: [] },
-    minutely: { type: "MinutelyEmbedded", objectType: "list", default: [] },
+    current: "CurrentEmbedded",
+    daily: { objectType: "DailyEmbedded", type: "list", default: [] },
+    alerts: { objectType: "AlertsEmbedded", type: "list", default: [] },
+    hourly: { objectType: "HourlyEmbedded", type: "list", default: [] },
+    minutely: { objectType: "MinutelyEmbedded", type: "list", default: [] },
   },
 };

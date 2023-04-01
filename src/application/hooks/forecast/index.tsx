@@ -16,7 +16,7 @@ export const ForecastProvider = ({ children }: Children) => {
   const httpService = new ForecastHttpService();
   const offlineService = new ForecastOfflineService();
 
-  const [forecasts, setForecasts] = useState<Forecast[]>();
+  const [forecasts, setForecasts] = useState<Forecast[]>([]);
 
   const getForecast = async (values: IGetForecastRequest) => {
     if (!isConnected) return;
