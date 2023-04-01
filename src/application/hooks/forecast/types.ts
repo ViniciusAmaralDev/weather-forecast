@@ -80,5 +80,7 @@ export type Forecast = {
 
 export type ForecastContext = {
   forecasts: Forecast[];
-  getForecast: (values: IGetForecastRequest) => Promise<void>;
+  selecetdForecast: Forecast;
+  getMyLocationForecast: () => Promise<void>;
+  getForecast: (values: IGetForecastRequest) => Promise<Forecast>;
 };

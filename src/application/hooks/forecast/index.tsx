@@ -17,6 +17,7 @@ export const ForecastProvider = ({ children }: Children) => {
   const offlineService = new ForecastOfflineService();
 
   const [forecasts, setForecasts] = useState<Forecast[]>([]);
+  const [selecetdForecast, setSelectedForecast] = useState<Forecast>();
 
   const getForecast = async (values: IGetForecastRequest) => {
     if (!isConnected) return;
@@ -24,17 +25,25 @@ export const ForecastProvider = ({ children }: Children) => {
       const { data } = await httpService.get(values);
       setForecasts((values) => [...values, data]);
       await offlineService.save(data);
+      return data;
     } catch (error: any) {
       throw error;
     }
   };
 
-  useEffect(() => {
-    (async () => {
-      if (!location) return;
+  const getMyLocationForecast = async () => {
+    if (!location) return;
+    try {
       const { lat: latitude, lon: longitude } = location;
-      await getForecast({ latitude, longitude });
-    })();
+      const forecast = await getForecast({ latitude, longitude });
+      setSelectedForecast(forecast);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  useEffect(() => {
+    getMyLocationForecast();
   }, [location]);
 
   useEffect(() => {
@@ -45,7 +54,14 @@ export const ForecastProvider = ({ children }: Children) => {
   }, []);
 
   return (
-    <Context.Provider value={{ forecasts, getForecast }}>
+    <Context.Provider
+      value={{
+        forecasts,
+        selecetdForecast,
+        getForecast,
+        getMyLocationForecast,
+      }}
+    >
       {children}
     </Context.Provider>
   );
