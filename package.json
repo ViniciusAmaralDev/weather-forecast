@@ -3,14 +3,16 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "expo start --dev-client",
-    "android": "ENVFILE=.env expo run:android",
-    "ios": "ENVFILE=.env expo run:ios",
+    "start": "npx react-native start --reset-cache",
+    "android": "ENVFILE=.env npx react-native run-android",
+    "ios": "ENVFILE=.env npx react-native run-ios",
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo/vector-icons": "^13.0.0",
     "@react-native-community/netinfo": "^9.3.8",
     "@react-native-masked-view/masked-view": "0.2.8",
+    "@react-navigation/bottom-tabs": "^6.5.7",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/stack": "^6.3.16",
     "@types/styled-components-react-native": "^5.2.1",

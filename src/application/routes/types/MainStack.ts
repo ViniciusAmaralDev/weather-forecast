@@ -1,9 +1,11 @@
 import { StackScreenProps } from "@react-navigation/stack";
+import { MainBottomTabsParamsList } from "./MainBottomTabs";
 import { MainScreensScreensEnum } from "../enums/MainStackEnum";
+import { NavigatorScreenParams } from "@react-navigation/native";
 
 export type MainStackParamList = {
   [MainScreensScreensEnum.LOADING]: undefined;
-  [MainScreensScreensEnum.HOME]: undefined;
+  [MainScreensScreensEnum.BOTTOM_TABS]: NavigatorScreenParams<MainBottomTabsParamsList>;
 };
 
 export type MainStackRootProps<T extends keyof MainStackParamList> =

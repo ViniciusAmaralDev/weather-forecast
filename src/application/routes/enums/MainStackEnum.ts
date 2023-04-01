@@ -1,4 +1,4 @@
 export enum MainScreensScreensEnum {
   LOADING = "loading",
-  HOME = "home",
+  BOTTOM_TABS = "bottom-tabs",
 }
