@@ -1,8 +1,13 @@
 import { AxiosPromise } from "axios";
-import IConvertAddressToCoordinatesResponse from "./response/IConvertAddressToCoordinatesResponse";
+import IGeocodingResponse from "./response/IGeocodingResponse";
+import IConvertCoordinatesToAddress from "./request/IConvertCoordinatesToAddress";
 
 export default interface IGeocodingService {
-  convertAddressToCoordinates: (address: string) => AxiosPromise<
-    IConvertAddressToCoordinatesResponse[]
-  >;
+  convertAddressToCoordinates: (
+    address: string
+  ) => AxiosPromise<IGeocodingResponse[]>;
+
+  convertCoordinatestoAddress: (
+    values: IConvertCoordinatesToAddress
+  ) => AxiosPromise<IGeocodingResponse[]>;
 }

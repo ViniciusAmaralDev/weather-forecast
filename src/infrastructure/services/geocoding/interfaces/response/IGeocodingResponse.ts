@@ -1,4 +1,4 @@
-export default interface IConvertAddressToCoordinatesResponse {
+export default interface IGeocodingResponse {
   name: string;
   local_names: Record<string, string>;
   lat: number;
