@@ -1,1 +1,7 @@
-export default {}
+export default {
+  BACKGROUND_PRIMARY: "#1D1F2E",
+  BACKGROUND_SECONDARY: "#6B6D88",
+  TEXT_PRIMARY: "#FFFEFE",
+  TEXT_SECONDARY: "#F6F6FC",
+  TEXT_LIGHT: "#D3D4D7",
+};
