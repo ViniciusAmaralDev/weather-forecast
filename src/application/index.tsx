@@ -1,4 +1,5 @@
 import React from "react";
+import MainRoutes from "./routes";
 import Providers from "./providers";
 import { colors, fonts } from "./theme";
 import { useColorScheme } from "react-native";
@@ -11,7 +12,7 @@ export default function Main() {
   return (
     <ThemeProvider theme={{ colors: theme, fonts }}>
       <Providers>
-        <></>
+        <MainRoutes />
       </Providers>
     </ThemeProvider>
   );
