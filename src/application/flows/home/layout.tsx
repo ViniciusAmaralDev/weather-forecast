@@ -1,19 +1,12 @@
 import React from "react";
+import { isToday } from "date-fns";
 import Header from "@components/header";
-import { ThemeModeEnum } from "@hooks/settings/type";
-import {
-  Container,
-  VerticalContainer,
-  ThemeModeButton,
-  ThemeModeIcon,
-  Card,
-  TitleCard,
-  LabelCard,
-  Image,
-} from "./styles";
 import { Forecast } from "@hooks/forecast/types";
-import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
+import { ThemeModeEnum } from "@hooks/settings/type";
+import WeeklyForecastCard from "./components/weeklyForecastCard";
+import CurrentForecastCard from "./components/currentForecastCard";
+import { Container, ThemeModeButton, ThemeModeIcon } from "./styles";
+import CurrentForecastCardInHours from "./components/curentForecastCardInHours";
 
 type Props = {
   forecast: Forecast;
@@ -24,11 +17,9 @@ type Props = {
 const HomeLayout = ({ forecast, themeMode, toggleThemeMode }: Props) => {
   const themeModeIconName = themeMode === ThemeModeEnum.LIGHT ? "moon" : "sun";
 
-  const date = format(new Date(forecast?.current?.dt * 1000), "E, dd MMMM", {
-    locale: ptBR,
-  });
-
-  console.log(forecast.current);
+  const hourly = forecast.hourly.filter((item) =>
+    isToday(new Date(item.dt * 1000))
+  );
 
   return (
     <Container
@@ -44,21 +35,9 @@ const HomeLayout = ({ forecast, themeMode, toggleThemeMode }: Props) => {
         />
       }
     >
-      <Card>
-        <VerticalContainer>
-          <TitleCard>{date}</TitleCard>
-          <LabelCard>{Math.round(forecast?.current.temp)}°C</LabelCard>
-          <LabelCard secondary>
-            {forecast?.current.weather[0].description}
-          </LabelCard>
-        </VerticalContainer>
-
-        <Image
-          source={{
-            uri: `https://openweathermap.org/img/wn/${forecast.current.weather[0].icon}@2x.png`,
-          }}
-        />
-      </Card>
+      <CurrentForecastCard current={forecast.current} />
+      <CurrentForecastCardInHours hourly={hourly} />
+      <WeeklyForecastCard forecast={forecast.daily} />
     </Container>
   );
 };

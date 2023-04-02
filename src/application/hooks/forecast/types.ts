@@ -15,20 +15,20 @@ type Default = {
   weather: { id: number; main: string; description: string; icon: string }[];
 };
 
-type Current = Default & {
+export type Current = Default & {
   sunrise: number;
   sunset: number;
 };
 
-type Minutely = { dt: number; precipitation: number };
+export type Minutely = { dt: number; precipitation: number };
 
-type Hourly = Default & {
+export type Hourly = Default & {
   wind_gust: number;
   pop: number;
   rain: Record<string, number>;
 };
 
-type Daily = {
+export type Daily = {
   dt: number;
   sunrise: number;
   sunset: number;
