@@ -12,11 +12,12 @@ import MainBottomTabs from "./MainBottomTabs.routes";
 const Stack = createStackNavigator<MainStackParamList>();
 
 export default function MainStackRoutes() {
-  const { selecetdForecast } = useForecast();
+  const { forecasts } = useForecast();
+  const isEmpty = forecasts.filter((item) => item.isSelected).length === 0;
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {!selecetdForecast ? (
+      {isEmpty ? (
         <Stack.Screen
           name={MainScreensScreensEnum.LOADING}
           component={Loading}
