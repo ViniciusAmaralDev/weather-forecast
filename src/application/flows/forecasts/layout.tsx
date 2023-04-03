@@ -2,13 +2,26 @@ import Card from "./card";
 import React, { useState } from "react";
 import Header from "@components/header";
 import { Forecast } from "@hooks/forecast/types";
-import { Container, SearchBar } from "./styles";
+import {
+  Container,
+  SearchBar,
+  FlatList,
+  AddButton,
+  AddButtonText,
+} from "./styles";
+import IGetForecastRequest from "infrastructure/services/forecast/http/interfaces/request/IGetForecastRequest";
 
-type Props = { forecasts: Forecast[] };
+type Props = {
+  forecasts: Forecast[];
+  handleGetForecast: (value: string) => Promise<void>;
+};
 
-const ForecastsLayout = ({ forecasts }: Props) => {
+const ForecastsLayout = ({ forecasts, handleGetForecast }: Props) => {
   const [inputValue, setInputValue] = useState("");
-  const filtered = forecasts.filter(item => item.timezone.includes(inputValue))
+
+  const filtered = forecasts.filter((item) =>
+    item.timezone.includes(inputValue)
+  );
 
   return (
     <Container
@@ -23,13 +36,21 @@ const ForecastsLayout = ({ forecasts }: Props) => {
         </>
       }
     >
-      {filtered.map((item, index) => (
-        <Card
-          key={index}
-          current={item.current}
-          location={forecasts[0].timezone}
-        />
-      ))}
+      <FlatList
+        data={filtered}
+        keyExtractor={(_, index) => index.toString()}
+        renderItem={({ item }) => <Card forecast={item as Forecast} />}
+        ListEmptyComponent={() => (
+          <AddButton
+            onPress={async () => {
+              await handleGetForecast(inputValue);
+              setInputValue("");
+            }}
+          >
+            <AddButtonText>Buscar</AddButtonText>
+          </AddButton>
+        )}
+      />
     </Container>
   );
 };

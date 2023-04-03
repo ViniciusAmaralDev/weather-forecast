@@ -13,31 +13,31 @@ import {
   Image,
   ClockIcon,
 } from "./styles";
-import { Current } from "@hooks/forecast/types";
+import { Forecast } from "@hooks/forecast/types";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import Shadow from "@flows/utils/Shadow";
 
-type Props = { current: Current; location: string };
+type Props = { forecast: Forecast };
 
-const Card = ({ current, location }: Props) => {
+const Card = ({ forecast }: Props) => {
   return (
     <Container style={{...Shadow}}>
       <Header>
         <Label secondary>
-          {format(new Date(current.dt * 1000), "EEEEEE dd, MMMM", {
+          {format(new Date(forecast.current.dt * 1000), "EEEEEE dd, MMMM", {
             locale: ptBR,
           })}
         </Label>
 
         <HeaderBadge>
           <PinIcon />
-          <BadgeText>{location}</BadgeText>
+          <BadgeText>{forecast.timezone}</BadgeText>
         </HeaderBadge>
       </Header>
 
       <HorizontalContainer>
-        <Label>{Math.round(current.temp)}°C</Label>
+        <Label>{Math.round(forecast.current.temp)}°C</Label>
 
         <VerticalDivider />
 
@@ -45,16 +45,16 @@ const Card = ({ current, location }: Props) => {
           <HorizontalContainer>
             <Image
               source={{
-                uri: `https://openweathermap.org/img/wn/${current.weather[0].icon}.png`,
+                uri: `https://openweathermap.org/img/wn/${forecast.current.weather[0].icon}.png`,
               }}
             />
-            <Label secondary>{current.weather[0].description}</Label>
+            <Label secondary>{forecast.current.weather[0].description}</Label>
           </HorizontalContainer>
 
           <HorizontalContainer>
             <ClockIcon />
             <Label secondary>
-              {format(new Date(current.dt * 1000), "HH:mm")}
+              {format(new Date(forecast.current.dt * 1000), "HH:mm")}
             </Label>
           </HorizontalContainer>
         </VerticalContainer>

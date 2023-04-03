@@ -17,7 +17,7 @@ type Props = {
 const HomeLayout = ({ forecast, themeMode, toggleThemeMode }: Props) => {
   const themeModeIconName = themeMode === ThemeModeEnum.LIGHT ? "moon" : "sun";
 
-  const hourly = forecast.hourly.filter((item) =>
+  const hourly = forecast?.hourly?.filter((item) =>
     isToday(new Date(item.dt * 1000))
   );
 
@@ -35,9 +35,13 @@ const HomeLayout = ({ forecast, themeMode, toggleThemeMode }: Props) => {
         />
       }
     >
-      <CurrentForecastCard current={forecast.current} />
-      <CurrentForecastCardInHours hourly={hourly} />
-      <WeeklyForecastCard forecast={forecast.daily} />
+      {forecast && (
+        <>
+          <CurrentForecastCard current={forecast?.current} />
+          <CurrentForecastCardInHours hourly={hourly} />
+          <WeeklyForecastCard forecast={forecast?.daily} />
+        </>
+      )}
     </Container>
   );
 };
