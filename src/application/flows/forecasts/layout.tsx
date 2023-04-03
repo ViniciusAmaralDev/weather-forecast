@@ -1,13 +1,37 @@
-import React from "react";
-import { Container } from "./styles";
+import Card from "./card";
+import React, { useState } from "react";
 import Header from "@components/header";
+import { Forecast } from "@hooks/forecast/types";
+import { Container, SearchBar } from "./styles";
 
-const FavoritesLayout = () => {
+type Props = { forecasts: Forecast[] };
+
+const ForecastsLayout = ({ forecasts }: Props) => {
+  const [inputValue, setInputValue] = useState("");
+  const filtered = forecasts.filter(item => item.timezone.includes(inputValue))
+
   return (
-    <Container header={<Header title="Previsões" leftContainer={<></>} />}>
-      <></>
+    <Container
+      header={
+        <>
+          <Header title="Previsões" leftContainer={<></>} />
+          <SearchBar
+            placeholder="pesquisar"
+            onChangeText={setInputValue}
+            handleClear={() => setInputValue("")}
+          />
+        </>
+      }
+    >
+      {filtered.map((item, index) => (
+        <Card
+          key={index}
+          current={item.current}
+          location={forecasts[0].timezone}
+        />
+      ))}
     </Container>
   );
 };
 
-export default FavoritesLayout;
+export default ForecastsLayout;
