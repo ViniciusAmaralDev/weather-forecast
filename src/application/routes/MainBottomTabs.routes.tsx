@@ -22,8 +22,8 @@ export default function MainBottomTabs() {
         tabBarStyle: {
           backgroundColor: theme.colors.BACKGROUND_PRIMARY,
         },
-        tabBarActiveTintColor: theme.colors.TEXT_PRIMARY,
-        tabBarInactiveTintColor: theme.colors.BACKGROUND_SECONDARY,
+        tabBarActiveTintColor: theme.colors.PURPLE,
+        tabBarInactiveTintColor: theme.colors.TEXT_SECONDARY,
       }}
     >
       <Tab.Screen
