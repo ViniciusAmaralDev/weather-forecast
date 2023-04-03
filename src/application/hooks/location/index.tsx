@@ -16,14 +16,18 @@ export const LocationProvider = ({ children }: Children) => {
       const { data } = await service.convertAddressToCoordinates(address);
       delete data[0].local_names;
       setLocation(data[0]);
+      return { latitude: data[0].lat, longitude: data[0].lon };
     } catch (error: any) {
       throw error;
     }
   };
 
   const getLocation = async () => {
-    let { status } = await ExpoLocation.requestForegroundPermissionsAsync();
-    if (status !== "granted") return;
+    const { granted } = await ExpoLocation.getForegroundPermissionsAsync();
+    if (!granted) {
+      const { status } = await ExpoLocation.requestForegroundPermissionsAsync();
+      if (status !== "granted") return;
+    }
 
     let {
       coords: { latitude, longitude },

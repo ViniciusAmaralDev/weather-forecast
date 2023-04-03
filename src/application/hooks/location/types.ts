@@ -6,7 +6,9 @@ export type Location = {
   state: string;
 };
 
+export type Coords = { latitude: number; longitude: number };
+
 export type LocationContext = {
   location: Location;
-  convertAddressToCoordinates: (address: string) => Promise<void>;
+  convertAddressToCoordinates: (address: string) => Promise<Coords>;
 };

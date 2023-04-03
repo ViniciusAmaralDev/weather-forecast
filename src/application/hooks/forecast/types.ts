@@ -69,18 +69,18 @@ type Alert = {
 export type Forecast = {
   lat: number;
   lon: number;
-  timezone: string;
-  timezone_offset: number;
-  current: Current;
-  minutely: Minutely[];
-  hourly: Hourly[];
   daily: Daily[];
   alerts: Alert[];
+  timezone: string;
+  current: Current;
+  hourly: Hourly[];
+  isSelected: boolean;
+  minutely: Minutely[];
+  timezone_offset: number;
 }
 
 export type ForecastContext = {
   forecasts: Forecast[];
-  selecetdForecast: Forecast;
   getMyLocationForecast: () => Promise<void>;
-  getForecast: (values: IGetForecastRequest) => Promise<Forecast>;
+  getForecast: (values: IGetForecastRequest) => Promise<void>;
 };

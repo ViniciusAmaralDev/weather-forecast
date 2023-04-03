@@ -17,47 +17,55 @@ export const ForecastProvider = ({ children }: Children) => {
   const offlineService = new ForecastOfflineService();
 
   const [forecasts, setForecasts] = useState<Forecast[]>([]);
-  const [selecetdForecast, setSelectedForecast] = useState<Forecast>();
 
   const getForecast = async (values: IGetForecastRequest) => {
     if (!isConnected) return;
     try {
       const { data } = await httpService.get(values);
-      setForecasts((values) => [...values, data]);
-      await offlineService.save(data);
-      return data;
+      const find = forecasts.find(({ timezone }) => timezone === data.timezone);
+      if (find) {
+        const forecast = { ...data, isSelected: find.isSelected };
+        setForecasts((values) =>
+          values.map((item) => {
+            if (item.timezone === data.timezone) return forecast;
+            else return item;
+          })
+        );
+        await offlineService.update(forecast);
+      } else {
+        const forecast = { ...data, isSelected: forecasts.length === 0 };
+        setForecasts((values) => [...values, forecast]);
+        await offlineService.save(forecast);
+      }
     } catch (error: any) {
-      throw error;
+      console.log(error);
     }
   };
 
   const getMyLocationForecast = async () => {
     if (!location) return;
+    await getForecast({ latitude: location.lat, longitude: location.lon });
     try {
-      const { lat: latitude, lon: longitude } = location;
-      const forecast = await getForecast({ latitude, longitude });
-      setSelectedForecast(forecast);
     } catch (error) {
       throw error;
     }
   };
 
   useEffect(() => {
-    getMyLocationForecast();
-  }, [location]);
-
-  useEffect(() => {
     (async () => {
-      const forecasts = await offlineService.getAll();
-      setForecasts(forecasts);
+      const offlineForecasts = await offlineService.getAll();
+      setForecasts(offlineForecasts);
     })();
   }, []);
+
+  useEffect(() => {
+    if (forecasts.length === 0) getMyLocationForecast();
+  }, [location]);
 
   return (
     <Context.Provider
       value={{
         forecasts,
-        selecetdForecast,
         getForecast,
         getMyLocationForecast,
       }}
