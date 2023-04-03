@@ -42,7 +42,6 @@ export const dailyEmbedded: ObjectSchema = {
     dt: "int",
     pop: "int",
     uvi: "int",
-    rain: "int",
     clouds: "int",
     sunset: "int",
     sunrise: "int",
@@ -57,6 +56,7 @@ export const dailyEmbedded: ObjectSchema = {
     wind_speed: "int",
     temp: "TempEmbedded",
     feels_like: "FeelsLikeEmbedded",
+    rain: { type: "dictionary", objectType: "double" },
     weather: { objectType: "WeatherEmbedded", type: "list", default: [] },
   },
 };
@@ -91,7 +91,7 @@ export const hourlyEmbedded: ObjectSchema = {
     feels_like: "int",
     visibility: "int",
     wind_speed: "int",
-    rain: { type: "dictionary", objectType: "int" },
+    rain: { type: "dictionary", objectType: "double" },
     weather: { objectType: "WeatherEmbedded", type: "list", default: [] },
   },
 };
@@ -131,6 +131,7 @@ export const forecastSchema: ObjectSchema = {
   properties: {
     lat: "int",
     lon: "int",
+    isSelected: "bool",
     timezone: "string",
     timezone_offset: "int",
     current: "CurrentEmbedded",
