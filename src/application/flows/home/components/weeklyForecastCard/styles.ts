@@ -1,6 +1,4 @@
-import Button from "@components/base/button";
 import Text from "@components/base/text";
-import { MaterialIcons } from "@expo/vector-icons";
 import styled from "styled-components/native";
 
 type LabelTempProps = { secondary?: boolean };
@@ -34,9 +32,10 @@ export const Image = styled.Image`
 `;
 
 export const LabelCard = styled(Text)`
+  flex: 1;
   font-size: 14px;
+  margin: 0px 16px;
   text-transform: capitalize;
-  /* font-family: ${({ theme }) => theme.fonts.MEDIUM}; */
   color: ${({ theme }) => theme.colors.TEXT_PRIMARY};
 `;
 
@@ -44,7 +43,7 @@ export const HorizontalContainer = styled.View<HorizontalContainerProps>`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: ${({showMarginBottom}) => showMarginBottom ? 16 : 0}px;
+  margin-bottom: ${({ showMarginBottom }) => (showMarginBottom ? 16 : 0)}px;
 `;
 
 export const LabelTemp = styled(Text)<LabelTempProps>`
@@ -52,5 +51,5 @@ export const LabelTemp = styled(Text)<LabelTempProps>`
   margin-left: ${({ secondary }) => (secondary ? 8 : 0)}px;
   font-size: ${({ secondary }) => (secondary ? 12 : 14)}px;
   color: ${({ theme, secondary }) =>
-    secondary ? theme.colors.TEXT_LIGHT : theme.colors.TEXT_PRIMARY};
+    secondary ? theme.colors.TEXT_TERTIARY : theme.colors.TEXT_PRIMARY};
 `;

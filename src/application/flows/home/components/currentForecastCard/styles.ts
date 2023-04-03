@@ -5,10 +5,8 @@ import styled from "styled-components/native";
 type LabelCardProps = { secondary?: boolean };
 
 export const Container = styled.View`
-  margin: 16px;
   padding: 16px;
   border-radius: 24px;
-  background-color: ${({ theme }) => theme.colors.BACKGROUND_SECONDARY};
 `;
 
 export const VerticalContainer = styled.View``;
@@ -23,7 +21,7 @@ export const Title = styled(Text)`
   font-size: 14px;
   text-transform: capitalize;
   font-family: ${({ theme }) => theme.fonts.MEDIUM};
-  color: ${({ theme }) => theme.colors.TEXT_LIGHT};
+  color: ${({ theme }) => theme.colors.TEXT_TERTIARY};
 `;
 
 export const Label = styled(Text)<LabelCardProps>`
@@ -50,10 +48,10 @@ export const BadgeText = styled(Text)`
   font-size: 12px;
   margin-left: 8px;
   /* font-family: ${({ theme }) => theme.fonts.MEDIUM}; */
-  color: ${({ theme }) => theme.colors.TEXT_LIGHT};
+  color: ${({ theme }) => theme.colors.TEXT_TERTIARY};
 `;
 
 export const Icon = styled(Feather).attrs(({ theme }) => ({
   size: 20,
-  color: theme.colors.TEXT_LIGHT,
+  color: theme.colors.TEXT_TERTIARY,
 }))``;

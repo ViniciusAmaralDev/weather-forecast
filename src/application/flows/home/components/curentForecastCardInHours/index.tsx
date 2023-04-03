@@ -11,13 +11,14 @@ import {
 import { Hourly } from "@hooks/forecast/types";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import Shadow from "@flows/utils/Shadow";
 
 type Props = { hourly: Hourly[] };
 
 const CurrentForecastCardInHours = ({ hourly }: Props) => {
   const CardItem = ({ data }: { data: Hourly }) => {
     return (
-      <Card>
+      <Card style={{ ...Shadow }}>
         <CardLabel>
           {format(new Date(data.dt * 1000), "HH:00", { locale: ptBR })}
         </CardLabel>

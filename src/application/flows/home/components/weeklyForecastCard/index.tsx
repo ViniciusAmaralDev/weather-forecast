@@ -11,6 +11,7 @@ import {
   HorizontalContainer,
   LabelTemp,
 } from "./styles";
+import Shadow from "@flows/utils/Shadow";
 
 type Props = { forecast: Daily[] };
 
@@ -22,7 +23,7 @@ const WeeklyForecastCard = ({ forecast }: Props) => {
       </HorizontalContainer>
 
       {forecast.map((item, index) => (
-        <Card key={index}>
+        <Card key={index} style={{ ...Shadow }}>
           <Image
             source={{
               uri: `https://openweathermap.org/img/wn/${item.weather[0].icon}.png`,

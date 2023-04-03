@@ -9,6 +9,7 @@ export const Container = styled.View`
 
 export const Card = styled.View`
   padding: 8px;
+  margin: 4px 0px;
   margin-right: 8px;
   border-radius: 12px;
   align-items: center;
